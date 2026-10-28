@@ -1,0 +1,291 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="dark">
+<head>
+  <meta name="robots" content="noindex,nofollow,noarchive">
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
+  <script>
+    (function () {
+      try {
+        var t = localStorage.getItem("pattaya-demo-theme");
+        if (t !== "light" && t !== "dark") t = "dark";
+        document.documentElement.setAttribute("data-theme", t);
+        document.documentElement.style.colorScheme = t;
+      } catch (e) {
+        document.documentElement.setAttribute("data-theme", "dark");
+        document.documentElement.style.colorScheme = "dark";
+      }
+    })();
+  </script>
+  <meta name="color-scheme" content="dark light" />
+  <title>Old site vs new demo — Scandia Jomtien Beach</title>
+  <meta name="description" content="Side-by-side comparison: live scandiajomtienbeach.com vs the new Scandia Jomtien Beach front-end demo by Vantage." />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,400;9..144,600&family=Manrope:wght@400;500;600;700&display=swap" rel="stylesheet" />
+  <style>
+    :root {
+      --cream: #0a121c; --sand: #ffb06a; --ink: #eef3f8; --muted: #8fa3b8;
+      --terracotta: #ff943e; --ocean: #5294d8; --surface: #121c2a; --bg: #0a121c;
+      --font-d: "Fraunces", Georgia, serif; --font-b: "Manrope", system-ui, sans-serif;
+      --glass: color-mix(in srgb, var(--surface) 72%, transparent);
+      --glass-border: rgba(238,243,248,0.1);
+      color-scheme: dark;
+    }
+    [data-theme="light"] {
+      color-scheme: light;
+      --bg: #f4f7fb; --surface: #ffffff; --ink: #122033; --muted: #5a6d82;
+      --cream: #f4f7fb; --sand: #d98940; --terracotta: #e07828; --ocean: #3a7fc4;
+      --glass: color-mix(in srgb, #ffffff 78%, transparent);
+      --glass-border: rgba(18,32,51,0.1);
+    }
+    * { box-sizing: border-box; }
+    html {
+      -webkit-text-size-adjust: 100%;
+      text-size-adjust: 100%;
+      overflow-x: clip;
+    }
+    body {
+      margin: 0; font-family: var(--font-b); color: var(--ink); background: var(--bg); line-height: 1.5;
+      overflow-x: clip;
+      padding-left: env(safe-area-inset-left, 0px);
+      padding-right: env(safe-area-inset-right, 0px);
+      padding-bottom: env(safe-area-inset-bottom, 0px);
+      -webkit-tap-highlight-color: transparent;
+    }
+    a { color: var(--sand); }
+    .top {
+      position: sticky; top: 0; z-index: 50;
+      background: color-mix(in srgb, var(--bg) 92%, transparent);
+      backdrop-filter: blur(16px) saturate(1.3);
+      -webkit-backdrop-filter: blur(16px) saturate(1.3);
+      border-bottom: 1px solid color-mix(in srgb, var(--ocean) 22%, transparent);
+      padding: 0.85rem 1.25rem;
+      padding-top: calc(0.85rem + env(safe-area-inset-top, 0px));
+      display: flex; flex-wrap: wrap; gap: 0.75rem; align-items: center; justify-content: space-between;
+    }
+    .top h1 {
+      font-family: var(--font-d); font-size: clamp(0.95rem, 3.5vw, 1.25rem);
+      margin: 0; font-weight: 400; max-width: 100%;
+    }
+    .top-nav { display: flex; flex-wrap: wrap; gap: 0.5rem; }
+    .btn {
+      display: inline-flex; align-items: center; justify-content: center;
+      min-height: 44px; padding: 0.55rem 0.95rem; border-radius: 999px;
+      text-decoration: none; font-weight: 600; font-size: 0.85rem;
+      touch-action: manipulation; -webkit-tap-highlight-color: transparent;
+    }
+    .btn-primary { background: var(--terracotta); color: #1a1008; }
+    .btn-ghost {
+      background: transparent; color: var(--ink);
+      border: 1px solid color-mix(in srgb, var(--ink) 18%, transparent);
+    }
+    .intro { max-width: 1100px; margin: 0 auto; padding: 1.5rem 1.25rem 0.5rem; }
+    .intro p { color: var(--muted); margin: 0.4rem 0 0; max-width: 46rem; font-weight: 300; }
+    .badge {
+      display: inline-block; font-size: 0.72rem; font-weight: 700; letter-spacing: 0.06em;
+      text-transform: uppercase; color: var(--ocean);
+      background: color-mix(in srgb, var(--ocean) 14%, transparent);
+      padding: 0.3rem 0.65rem; border-radius: 999px;
+    }
+    .split {
+      display: grid; gap: 1rem; max-width: 1400px; margin: 0 auto;
+      padding: 1rem 1.25rem 2rem;
+    }
+    @media (min-width: 960px) {
+      .split { grid-template-columns: 1fr 1fr; min-height: 72dvh; }
+    }
+    .panel {
+      background: var(--surface); border-radius: 20px; overflow: hidden;
+      box-shadow: 0 16px 40px rgba(0,0,0,0.35); display: flex; flex-direction: column;
+      border: 1px solid color-mix(in srgb, var(--ocean) 14%, transparent);
+      min-width: 0;
+    }
+    .panel-head {
+      padding: 0.9rem 1.1rem; display: flex; flex-wrap: wrap; gap: 0.5rem; align-items: center;
+      justify-content: space-between;
+      border-bottom: 1px solid color-mix(in srgb, var(--ocean) 12%, transparent);
+      background: color-mix(in srgb, var(--surface) 92%, #000);
+    }
+    .panel-head h2 { margin: 0; font-size: 0.92rem; }
+    .tag {
+      font-size: 0.68rem; font-weight: 700; text-transform: uppercase;
+      letter-spacing: 0.05em; padding: 0.25rem 0.5rem; border-radius: 6px;
+    }
+    .tag-old { background: #3a2820; color: #ff943e; }
+    .tag-new { background: rgba(82,148,216,0.15); color: var(--ocean); }
+    .frame-wrap {
+      position: relative; flex: 1;
+      min-height: min(70vh, 520px);
+      min-height: min(70dvh, 520px);
+      background: #060b12;
+    }
+    .frame-wrap iframe {
+      position: absolute; inset: 0; width: 100%; height: 100%; border: 0; background: var(--surface);
+    }
+    .fallback {
+      position: relative; padding: 1rem; text-align: center;
+      border-top: 1px solid color-mix(in srgb, var(--ocean) 12%, transparent);
+      color: var(--muted); font-size: 0.88rem;
+    }
+    .fallback p { margin: 0 0 0.75rem; }
+    .old-bullets, .checklist { max-width: 1100px; margin: 0 auto 2rem; padding: 0 1.25rem; }
+    .old-bullets { display: grid; gap: 1rem; }
+    @media (min-width: 800px) { .old-bullets { grid-template-columns: 1fr 1fr; } }
+    .bullet-card, .checklist-card {
+      background: var(--glass);
+      backdrop-filter: blur(16px) saturate(1.3);
+      -webkit-backdrop-filter: blur(16px) saturate(1.3);
+      border-radius: 16px; padding: 1.35rem 1.5rem;
+      box-shadow: 0 12px 32px rgba(0,0,0,0.3);
+      border: 1px solid var(--glass-border);
+      min-width: 0;
+    }
+    .bullet-card h3 { margin: 0 0 0.6rem; font-size: 1rem; }
+    .checklist-card h2 {
+      font-family: var(--font-d); margin: 0 0 0.35rem; font-size: clamp(1.25rem, 4vw, 1.5rem); font-weight: 400;
+    }
+    .checklist-card > p { color: var(--muted); margin: 0 0 1.25rem; font-weight: 300; }
+    .bullet-card ul { margin: 0; padding-left: 1.1rem; color: var(--muted); font-size: 0.9rem; font-weight: 300; }
+    .bullet-card li { margin-bottom: 0.3rem; }
+    .checks { list-style: none; padding: 0; margin: 0; display: grid; gap: 0.55rem; }
+    @media (min-width: 700px) { .checks { grid-template-columns: 1fr 1fr; } }
+    .checks li {
+      display: flex; gap: 0.65rem; align-items: flex-start; padding: 0.75rem 0.9rem;
+      background: color-mix(in srgb, var(--bg) 80%, transparent); border-radius: 12px;
+      font-size: 0.9rem; border: 1px solid color-mix(in srgb, var(--terracotta) 14%, transparent);
+      min-width: 0;
+    }
+    .checks label {
+      display: flex; gap: 0.65rem; align-items: flex-start; width: 100%;
+      min-height: 44px; cursor: pointer;
+      touch-action: manipulation;
+    }
+    .checks input {
+      margin-top: 0.2rem; accent-color: var(--sand);
+      width: 1.15rem; height: 1.15rem; flex-shrink: 0;
+      touch-action: manipulation;
+    }
+    footer {
+      text-align: center;
+      padding: 0 1.25rem calc(2.5rem + env(safe-area-inset-bottom, 0px));
+      color: var(--muted); font-size: 0.85rem;
+    }
+    .vantage { display: inline-flex; align-items: center; gap: 0.5rem; justify-content: center; margin-top: 0.75rem; }
+    .vantage img { height: 24px; width: auto; }
+    @media (max-width: 430px) {
+      .top, .intro, .split, .old-bullets, .checklist, footer {
+        padding-left: 1rem; padding-right: 1rem;
+      }
+      .top { gap: 0.5rem; }
+      .top-nav { width: 100%; }
+      .top-nav .btn { flex: 1 1 auto; }
+      .frame-wrap {
+        min-height: min(62vh, 420px);
+        min-height: min(62dvh, 420px);
+      }
+      .bullet-card, .checklist-card { padding: 1.1rem 1.15rem; }
+    }
+    @media (prefers-reduced-motion: reduce) {
+      .top, .bullet-card, .checklist-card {
+        backdrop-filter: blur(8px) saturate(1.15);
+        -webkit-backdrop-filter: blur(8px) saturate(1.15);
+      }
+    }
+  </style>
+</head>
+<body>
+  <div class="top">
+    <h1>Scandia — old vs new</h1>
+    <div class="top-nav">
+      <a class="btn btn-primary" href="index.html">Open new demo</a>
+      <a class="btn btn-ghost" href="https://www.scandiajomtienbeach.com/" target="_blank" rel="noopener noreferrer">Open old site</a>
+    </div>
+  </div>
+
+  <div class="intro">
+    <span class="badge">Vantage demo · no outreach</span>
+    <p>
+      Ancient RT Theme 15 WordPress is still selling rooms, but most subpages 404.
+      This demo covers every recoverable public fact from the live homepage plus indexed About / FAQ / Nearby content —
+      glass dark UI, TH/EN, and their real logo &amp; photos only.
+    </p>
+  </div>
+
+  <div class="split">
+    <section class="panel">
+      <div class="panel-head">
+        <h2>Old — scandiajomtienbeach.com</h2>
+        <span class="tag tag-old">Live</span>
+      </div>
+      <div class="frame-wrap">
+        <iframe title="Old Scandia site" src="https://www.scandiajomtienbeach.com/" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>
+      </div>
+      <div class="fallback">
+        <p>If the iframe is blocked, open the live site in a new tab.</p>
+        <a class="btn btn-ghost" href="https://www.scandiajomtienbeach.com/" target="_blank" rel="noopener noreferrer">Open old site</a>
+      </div>
+    </section>
+    <section class="panel">
+      <div class="panel-head">
+        <h2>New — Scandia demo</h2>
+        <span class="tag tag-new">Demo</span>
+      </div>
+      <div class="frame-wrap">
+        <iframe title="New Scandia demo" src="index.html" loading="lazy"></iframe>
+      </div>
+      <div class="fallback">
+        <p>Full-screen the new demo for mobile / theme QA.</p>
+        <a class="btn btn-primary" href="index.html">Open new demo</a>
+      </div>
+    </section>
+  </div>
+
+  <div class="old-bullets">
+    <article class="bullet-card">
+      <h3>What still works on the old site</h3>
+      <ul>
+        <li>Homepage only (RT Theme 15) — rooms still sold via Beds24 plugin</li>
+        <li>Hero slides: Beach / Room / Pool photos + logo</li>
+        <li>Contact: Jomtien Beach Soi 7 · +66 096 221 1003 · booking@…</li>
+        <li>Social: Facebook, Instagram, TripAdvisor, Google Maps</li>
+        <li>GTranslate present (bilingual intent)</li>
+      </ul>
+    </article>
+    <article class="bullet-card">
+      <h3>What 404s (content recovered from public index)</h3>
+      <ul>
+        <li>/rooms/ · /about-us/ · /facilities/ · /lobby-exteriors/</li>
+        <li>/faq/ · /contact-us/ · /nearby-attractions/</li>
+        <li>/our-reviews/ · /our-offers/ · /be-a-member/ · sitemap</li>
+        <li>Demo includes FAQ accordion, About services, Nearby map/chips, offers teasers — no invented rates or testimonials</li>
+        <li>Uniqueness pass: editorial beach hero + peek photo strip (3 real photos) — not the shared hotel template</li>
+      </ul>
+    </article>
+  </div>
+
+  <div class="checklist">
+    <article class="checklist-card">
+      <h2>Fact-check checklist</h2>
+      <p>Designer / CEO pass — tick what’s confirmed against the old site + indexed pages.</p>
+      <ul class="checks">
+        <li><label><input type="checkbox" /> 200 m from Jomtien Beach · Soi 7 · 48 rooms</label></li>
+        <li><label><input type="checkbox" /> Suite amenities: bath, A/C, TV EN+TH, fridge</label></li>
+        <li><label><input type="checkbox" /> Pool + coffee shop + front desk</label></li>
+        <li><label><input type="checkbox" /> Phone / email / map / social links match</label></li>
+        <li><label><input type="checkbox" /> FAQ facts (check-in 14:00, extra bed 150฿, pool 20×3×0.6…)</label></li>
+        <li><label><input type="checkbox" /> About services list + COVID closure notes preserved</label></li>
+        <li><label><input type="checkbox" /> Nearby attractions blocks preserved</label></li>
+        <li><label><input type="checkbox" /> Real logo (sun + script + palm) + only site photos</label></li>
+        <li><label><input type="checkbox" /> Dark default / light toggle / glass / TH·EN</label></li>
+        <li><label><input type="checkbox" /> No outreach sent · Vantage footer credit</label></li>
+      </ul>
+    </article>
+  </div>
+
+  <footer>
+    <p>Front-end demo by <strong>Vantage</strong> — not affiliated outreach. Business logo ≠ Vantage.</p>
+    <div class="vantage"><img src="assets/vantage.png" alt="Vantage" width="100" height="28" /> <span>agency demo</span></div>
+  </footer>
+</body>
+</html>
